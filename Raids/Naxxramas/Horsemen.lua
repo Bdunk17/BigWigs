@@ -281,10 +281,13 @@ end
 function module:Mark()
 	self:RemoveBar(string.format(L["markbar"], self.marks))
 	self.marks = self.marks + 1
-	if self.db.profile.mark then
+	if self.marks == 3 then
+		self.marks = 0
+		if self.db.profile.mark then
 		self:Message(string.format(L["mark_warn"], self.marks), "Important")
-		self:Bar(string.format(L["markbar"], self.marks + 1), timer.mark, icon.mark)
-		self:DelayedMessage(timer.mark - 5, string.format( L["mark_warn_5"], self.marks + 1), "Urgent")
+			self:Bar(string.format(L["markbar"], self.marks + 1), timer.mark, icon.mark)
+			self:DelayedMessage(timer.mark - 5, string.format( L["mark_warn_5"], self.marks + 1), "Urgent")
+		end
 	end
 end
 
